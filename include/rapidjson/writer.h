@@ -363,7 +363,10 @@ protected:
                 PutUnsafe(*os_, '-');
             }
             else
+            {
                 PutReserve(*os_, 10);
+                PutUnsafe(*os_, '"');
+            }
             PutUnsafe(*os_, 'I'); PutUnsafe(*os_, 'n'); PutUnsafe(*os_, 'f');
             PutUnsafe(*os_, 'i'); PutUnsafe(*os_, 'n'); PutUnsafe(*os_, 'i'); PutUnsafe(*os_, 't'); PutUnsafe(*os_, 'y');
             PutUnsafe(*os_, '"');
@@ -566,7 +569,10 @@ inline bool Writer<StringBuffer>::WriteDouble(double d) {
             PutUnsafe(*os_, '-');
         }
         else
+        {
             PutReserve(*os_, 10);
+            PutUnsafe(*os_, '"');
+        }
         PutUnsafe(*os_, 'I'); PutUnsafe(*os_, 'n'); PutUnsafe(*os_, 'f');
         PutUnsafe(*os_, 'i'); PutUnsafe(*os_, 'n'); PutUnsafe(*os_, 'i'); PutUnsafe(*os_, 't'); PutUnsafe(*os_, 'y');
         PutUnsafe(*os_, '"');

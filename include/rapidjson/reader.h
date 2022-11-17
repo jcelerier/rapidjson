@@ -1521,28 +1521,33 @@ private:
                 }
         }
         // Parse NaN or Infinity here
-        else if ((parseFlags & kParseNanAndInfFlag) && RAPIDJSON_LIKELY((s.Peek() == 'I' || s.Peek() == 'N'))) {
-            if (Consume(s, 'N')) {
-                if (Consume(s, 'a') && Consume(s, 'N')) {
-                    d = std::numeric_limits<double>::quiet_NaN();
-                    useNanOrInf = true;
-                }
-            }
-            else if (RAPIDJSON_LIKELY(Consume(s, 'I'))) {
-                if (Consume(s, 'n') && Consume(s, 'f')) {
-                    d = (minus ? -std::numeric_limits<double>::infinity() : std::numeric_limits<double>::infinity());
-                    useNanOrInf = true;
+        else if (parseFlags & kParseNanAndInfFlag) {
+            bool hasQuotes = RAPIDJSON_LIKELY(Consume(s, '"'));
 
-                    if (RAPIDJSON_UNLIKELY(s.Peek() == 'i' && !(Consume(s, 'i') && Consume(s, 'n')
-                                                                && Consume(s, 'i') && Consume(s, 't') && Consume(s, 'y')))) {
-                        RAPIDJSON_PARSE_ERROR(kParseErrorValueInvalid, s.Tell());
+            if(RAPIDJSON_LIKELY((s.Peek() == 'I' || s.Peek() == 'N'))) {
+                if (Consume(s, 'N')) {
+                    if (Consume(s, 'a') && Consume(s, 'N')) {
+                        d = std::numeric_limits<double>::quiet_NaN();
+                        useNanOrInf = true;
                     }
                 }
-            }
+                else if (RAPIDJSON_LIKELY(Consume(s, 'I'))) {
+                    if (Consume(s, 'n') && Consume(s, 'f')) {
+                        d = (minus ? -std::numeric_limits<double>::infinity() : std::numeric_limits<double>::infinity());
+                        useNanOrInf = true;
 
-            if (RAPIDJSON_UNLIKELY(!useNanOrInf)) {
-                RAPIDJSON_PARSE_ERROR(kParseErrorValueInvalid, s.Tell());
+                        if (RAPIDJSON_UNLIKELY(s.Peek() == 'i' && !(Consume(s, 'i') && Consume(s, 'n')
+                                                                    && Consume(s, 'i') && Consume(s, 't') && Consume(s, 'y')))) {
+                            RAPIDJSON_PARSE_ERROR(kParseErrorValueInvalid, s.Tell());
+                        }
+                    }
+                }
+
+                if (RAPIDJSON_UNLIKELY(hasQuotes && !Consume(s, '"')) || RAPIDJSON_UNLIKELY(!useNanOrInf))
+                    RAPIDJSON_PARSE_ERROR(kParseErrorValueInvalid, s.Tell());
             }
+            else
+                RAPIDJSON_PARSE_ERROR(kParseErrorValueInvalid, s.Tell());
         }
         else
             RAPIDJSON_PARSE_ERROR(kParseErrorValueInvalid, s.Tell());
