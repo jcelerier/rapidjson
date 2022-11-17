@@ -2330,6 +2330,14 @@ TEST(Reader, ParseNanAndInfinity) {
     TEST_NAN_INF("Infinity", inf);
     TEST_NAN_INF("-Inf", -inf);
     TEST_NAN_INF("-Infinity", -inf);
+
+    TEST_NAN_INF("\"NaN\"", nan);
+    TEST_NAN_INF("\"-NaN\"", nan);
+    TEST_NAN_INF("\"Inf\"", inf);
+    TEST_NAN_INF("\"Infinity\"", inf);
+    TEST_NAN_INF("\"-Inf\"", -inf);
+    TEST_NAN_INF("\"-Infinity\"", -inf);
+
     TEST_NAN_INF_ERROR(kParseErrorValueInvalid, "NInf", 1u);
     TEST_NAN_INF_ERROR(kParseErrorValueInvalid, "NaInf", 2u);
     TEST_NAN_INF_ERROR(kParseErrorValueInvalid, "INan", 1u);
@@ -2338,6 +2346,9 @@ TEST(Reader, ParseNanAndInfinity) {
     TEST_NAN_INF_ERROR(kParseErrorValueInvalid, "-nan", 1u);
     TEST_NAN_INF_ERROR(kParseErrorValueInvalid, "NAN", 1u);
     TEST_NAN_INF_ERROR(kParseErrorValueInvalid, "-Infinty", 6u);
+    TEST_NAN_INF_ERROR(kParseErrorValueInvalid, "\"NaN", 4u);
+    TEST_NAN_INF_ERROR(kParseErrorValueInvalid, "\"Inf", 4u);
+    TEST_NAN_INF_ERROR(kParseErrorValueInvalid, "\"-Inf", 4u);
 
 #undef TEST_NAN_INF_ERROR
 #undef TEST_NAN_INF

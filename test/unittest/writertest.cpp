@@ -493,7 +493,7 @@ TEST(Writer, NaN) {
     {
         Writer<StringBuffer, UTF8<>, UTF8<>, CrtAllocator, kWriteNanAndInfFlag> writer(buffer);
         EXPECT_TRUE(writer.Double(nan));
-        EXPECT_STREQ("NaN", buffer.GetString());
+        EXPECT_STREQ("\"NaN\"", buffer.GetString());
     }
     GenericStringBuffer<UTF16<> > buffer2;
     Writer<GenericStringBuffer<UTF16<> > > writer2(buffer2);
@@ -521,7 +521,7 @@ TEST(Writer, Inf) {
         Writer<StringBuffer, UTF8<>, UTF8<>, CrtAllocator, kWriteNanAndInfFlag> writer(buffer);
         EXPECT_TRUE(writer.Double(-inf));
     }
-    EXPECT_STREQ("Infinity-Infinity", buffer.GetString());
+    EXPECT_STREQ("\"Infinity\"\"-Infinity\"", buffer.GetString());
 }
 
 TEST(Writer, RawValue) {
