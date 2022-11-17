@@ -351,20 +351,25 @@ protected:
             if (!(writeFlags & kWriteNanAndInfFlag))
                 return false;
             if (internal::Double(d).IsNan()) {
-                PutReserve(*os_, 3);
+                PutReserve(*os_, 5);
+                PutUnsafe(*os_, '"');
                 PutUnsafe(*os_, 'N'); PutUnsafe(*os_, 'a'); PutUnsafe(*os_, 'N');
+                PutUnsafe(*os_, '"');
                 return true;
             }
             if (internal::Double(d).Sign()) {
-                PutReserve(*os_, 9);
+                PutReserve(*os_, 11);
+                PutUnsafe(*os_, '"');
                 PutUnsafe(*os_, '-');
             }
             else
-                PutReserve(*os_, 8);
+                PutReserve(*os_, 10);
             PutUnsafe(*os_, 'I'); PutUnsafe(*os_, 'n'); PutUnsafe(*os_, 'f');
             PutUnsafe(*os_, 'i'); PutUnsafe(*os_, 'n'); PutUnsafe(*os_, 'i'); PutUnsafe(*os_, 't'); PutUnsafe(*os_, 'y');
+            PutUnsafe(*os_, '"');
             return true;
         }
+
 
         char buffer[25];
         char* end = internal::dtoa(d, buffer, maxDecimalPlaces_);
@@ -549,18 +554,22 @@ inline bool Writer<StringBuffer>::WriteDouble(double d) {
         if (!(kWriteDefaultFlags & kWriteNanAndInfFlag))
             return false;
         if (internal::Double(d).IsNan()) {
-            PutReserve(*os_, 3);
+            PutReserve(*os_, 5);
+            PutUnsafe(*os_, '"');
             PutUnsafe(*os_, 'N'); PutUnsafe(*os_, 'a'); PutUnsafe(*os_, 'N');
+            PutUnsafe(*os_, '"');
             return true;
         }
         if (internal::Double(d).Sign()) {
-            PutReserve(*os_, 9);
+            PutReserve(*os_, 11);
+            PutUnsafe(*os_, '"');
             PutUnsafe(*os_, '-');
         }
         else
-            PutReserve(*os_, 8);
+            PutReserve(*os_, 10);
         PutUnsafe(*os_, 'I'); PutUnsafe(*os_, 'n'); PutUnsafe(*os_, 'f');
         PutUnsafe(*os_, 'i'); PutUnsafe(*os_, 'n'); PutUnsafe(*os_, 'i'); PutUnsafe(*os_, 't'); PutUnsafe(*os_, 'y');
+        PutUnsafe(*os_, '"');
         return true;
     }
     
