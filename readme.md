@@ -1,6 +1,11 @@
 ![RapidJSON logo](doc/logo/rapidjson.png)
 
-![Release version](https://img.shields.io/badge/release-v1.1.0-blue.svg)
+![Release version](https://img.shields.io/badge/release-v1.2.0-blue.svg)
+
+Latest version released by Tencent: [v1.1.0 (2016)](https://github.com/Tencent/rapidjson/issues/2284) with no update in 2024.
+
+Fork existing for the sole reason of providing a v1.2.0 tag so that Linux distros can finally update to a version that is not 
+riddled with bugs and security issues.
 
 ## A fast JSON parser/generator for C++ with both SAX/DOM style API
 

@@ -4,6 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## 1.2.0 - 2024-07-12
+
+[Full changelog](https://github.com/jcelerier/rapidjson/compare/v1.1.0...v1.2.0)
+
+* C++20 compatibility
+
 ## 1.1.0 - 2016-08-25
 
 ### Added

@@ -1,6 +1,6 @@
 ![RapidJSON logo](doc/logo/rapidjson.png)
 
-![Release version](https://img.shields.io/badge/release-v1.1.0-blue.svg)
+![Release version](https://img.shields.io/badge/release-v1.2.0-blue.svg)
 
 ## 高效的 C++ JSON 解析／生成器，提供 SAX 及 DOM 风格 API
 
